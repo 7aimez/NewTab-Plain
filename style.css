@@ -181,13 +181,13 @@ input {
   margin-right: 200px;
 }
 
-.quickLink {
+.quick-link {
   border-radius: 2.5px;
   background-color: white;
   color: grey;
 }
 
-.quickLink {
+.quick-link:hover {
   background-color: light-grey;
   color: white;
   border-bottom: 1px solid green;
