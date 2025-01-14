@@ -181,6 +181,18 @@ input {
   margin-right: 200px;
 }
 
+.quickLink {
+  border-radius: 2.5px;
+  background-color: white;
+  color: grey;
+}
+
+.quickLink {
+  background-color: light-grey;
+  color: white;
+  border-bottom: 1px solid green;
+}
+
 
 
 
