@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Barrio&family=Comfortaa:wght@300&family=Kablammo&family=Poiret+One&family=Quicksand:wght@300&display=swap');
+
+
+h1 {
+  font-family: 'Comfortaa';
+}
+
+h2 {
+  font-family: 'Comfortaa';
+}
+
+
+.search-container {
+  font-family: 'Poiret One';
+}
+
+
+.container {
+    text-align: center;
+}
+
+.time-container h1 {
+    color: grey;
+    font-family: 'Quicksand';
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+
+.time-container h2 {
+    color: grey;
+    font-family: 'Quicksand';
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+}
+
+.search-container {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+}
+
+.search-container input {
+    width: 80%;
+    padding: 15px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.search-container button {
+    padding: 15px 30px;
+    background-color: lightgrey;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: white;
+    display: inline-block;
+}
+
+.search-container button:hover {
+    background-color: whitesmoke;
+    color: lightgrey;
+}
+
+footer {
+    margin-top: 40px;
+    font-size: 0.9rem;
+    color: lightgrey;
+    
+}
+
+#search {
+    background-color: white;
+    border: solid 1px lightgrey;
+    color: grey;
+    font-family: 'Comfortaa';
+}
+
+#searchButton {
+  font-family: 'Comfortaa';
+}
+
+#moreButton {
+  color: grey;
+  text-decoration: none;
+  font-family: 'Quicksand';
+  padding: 5px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+#appsButton {
+  color: grey;
+  text-decoration: none;
+  font-family: 'Quicksand';
+  padding: 5px;
+  position: absolute;
+  right: 15px;
+  top: 5px;
+}
+
+body {
+  overflow: hidden;
+}
+
+.right {
+  color: grey;
+  text-decoration: none;
+  font-family: 'Quicksand';
+  padding: 5px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.appImage {
+  width: 100px;
+  height: 100px;
+  background-color: lightgrey;
+  border-radius: 10px;
+}
+
+.appCaption {
+  align: center;
+  font-family: 'Quicksand';
+  text-decoration: none;
+}
+
+.quickLinks {
+  font-family: 'Quicksand';
+  text-decoration: none;
+}
+
+.navStyle {
+    position: absolute;
+    top: 0;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #ebebeb;
+}
+
+.buttonStyle {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: lightgrey;
+    text-decoration: none;
+    font-family: 'Quicksand';
+}
+
+ul {
+  font-family: 'Quicksand';
+  text-decoration: none;
+}
+
+button {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.quickLinksContainer {
+  text-decoration: none;
+}
+
+
+
+
+
+
