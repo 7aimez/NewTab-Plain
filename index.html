@@ -68,7 +68,9 @@
                     linkElement.href = linkUrl;
                     linkElement.textContent = linkText;
                     linkElement.classList.add('quick-link'); // Add styling class
-                    quickLinksContainer.appendChild(`${linkElement}<br>`); // Append to container
+                    quickLinksContainer.appendChild(linkElement);
+                    quickLinksContainer.appendChild(document.createElement('br')); // To create a new line after each link
+
                 }
             });
 
