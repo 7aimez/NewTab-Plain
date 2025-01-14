@@ -11,11 +11,23 @@
     <script src="autofocus.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Barrio&family=Comfortaa:wght@300&family=Doto:wght@100..900&family=Kablammo&family=Poiret+One&family=Quicksand:wght@300&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+        .quick-link {
+            display: block;
+            padding: 5px;
+            margin: 5px 0;
+            color: blue;
+            text-decoration: none;
+        }
+        
+        .quick-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Add any additional styling for links or other elements */
     </style>
 </head>
-<body style="background-image: 'bgimage.png';">
-    <!-- <a id="appsButton" href="apps.html"><span class="material-symbols-rounded">desktop_landscape</span></a>
-    <br> -->
+<body style="background-image: url('bgimage.png');">
     <a id="moreButton" href="more.html"><span class="material-symbols-rounded">apps</span></a>
     <div class="container">
         <div class="time-container" style="border-radius: 10px; background: white; opacity: 75%;">
@@ -26,7 +38,7 @@
         <div class="quickLinks">
             <h3>Quick Links</h3>
             <div class="quickLinksContainer">
-                <!-- QUICK LINKS GO HERE -->
+                <!-- Quick links will be loaded here -->
             </div>
             <br>
             <button class="buttonStyle">Add Link</button>
@@ -37,33 +49,57 @@
             <button id="searchButton"><i class="fa fa-search"></i> Search</button>
         </div>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    // Function to handle adding a new quick link
-    document.querySelector('.buttonStyle').addEventListener('click', function() {
-        const linkUrl = prompt("Enter the URL for your quick link:");
-        const linkText = prompt("Enter the name of your quick link:");
+            const quickLinksContainer = document.querySelector('.quickLinksContainer');
 
-        if (linkUrl && linkText) {
-            // Create a new anchor element for the quick link
-            const linkElement = document.createElement('a');
-            linkElement.href = linkUrl;
-            linkElement.textContent = linkText;
-            linkElement.classList.add('quick-link'); // Add styling class
-            document.querySelector('.quickLinksContainer').appendChild(linkElement); // Append to container
-        }
-    });
+            // Load quick links from localStorage on page load
+            function loadQuickLinks() {
+                const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
+                savedLinks.forEach(link => {
+                    const linkElement = document.createElement('a');
+                    linkElement.href = link.url;
+                    linkElement.textContent = link.name;
+                    linkElement.classList.add('quick-link');
+                    quickLinksContainer.appendChild(linkElement);
+                });
+            }
 
-    // Handle the search button functionality
-    document.querySelector('#searchButton').addEventListener('click', function() {
-        const query = document.querySelector('#search').value;
-        if (query) {
-            window.location.href = `https://www.google.com/search?q=${query}`;
-        }
-    });
-});
+            // Function to handle adding a new quick link
+            document.querySelector('.buttonStyle').addEventListener('click', function() {
+                const linkUrl = prompt("Enter the URL for your quick link:");
+                const linkText = prompt("Enter the name of your quick link:");
 
+                if (linkUrl && linkText) {
+                    // Save the new link to localStorage
+                    const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
+                    savedLinks.push({ url: linkUrl, name: linkText });
+                    localStorage.setItem('quickLinks', JSON.stringify(savedLinks));
+
+                    // Create a new anchor element for the quick link
+                    const linkElement = document.createElement('a');
+                    linkElement.href = linkUrl;
+                    linkElement.textContent = linkText;
+                    linkElement.classList.add('quick-link'); // Add styling class
+                    quickLinksContainer.appendChild(linkElement); // Append to container
+                }
+            });
+
+            // Handle the search button functionality
+            document.querySelector('#searchButton').addEventListener('click', function() {
+                const query = document.querySelector('#search').value;
+                if (query) {
+                    window.location.href = `https://www.google.com/search?q=${query}`;
+                }
+            });
+
+            // Load the quick links when the page is loaded
+            loadQuickLinks();
+        });
     </script>
-    <script src="script.js"></script>
+
+    <!-- Font Awesome (for the search icon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </body>
 </html>
