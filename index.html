@@ -37,7 +37,33 @@
             <button id="searchButton"><i class="fa fa-search"></i> Search</button>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Function to handle adding a new quick link
+    document.querySelector('.buttonStyle').addEventListener('click', function() {
+        const linkUrl = prompt("Enter the URL for your quick link:");
+        const linkText = prompt("Enter the name of your quick link:");
 
+        if (linkUrl && linkText) {
+            // Create a new anchor element for the quick link
+            const linkElement = document.createElement('a');
+            linkElement.href = linkUrl;
+            linkElement.textContent = linkText;
+            linkElement.classList.add('quick-link'); // Add styling class
+            document.querySelector('.quickLinksContainer').appendChild(linkElement); // Append to container
+        }
+    });
+
+    // Handle the search button functionality
+    document.querySelector('#searchButton').addEventListener('click', function() {
+        const query = document.querySelector('#search').value;
+        if (query) {
+            window.location.href = `https://www.google.com/search?q=${query}`;
+        }
+    });
+});
+
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
