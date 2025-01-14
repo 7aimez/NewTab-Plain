@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="icon" type="image/x-icon" href="favicon.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=apps" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=apps">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,9 +11,58 @@
     <script src="autofocus.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Barrio&family=Comfortaa:wght@300&family=Doto:wght@100..900&family=Kablammo&family=Poiret+One&family=Quicksand:wght@300&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+        body {
+            background-image: url('bgimage.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .quick-link {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .quick-link:hover {
+            color: #0073e6;
+            text-decoration: underline;
+        }
+
+        .buttonStyle {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .buttonStyle:hover {
+            background-color: #45a049;
+        }
+
+        #removeAllButton {
+            background-color: #f44336; /* Red */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #removeAllButton:hover {
+            background-color: #da190b;
+        }
     </style>
 </head>
-<body style="background-image: url('bgimage.png');">
+<body>
     <a id="moreButton" href="more.html"><span class="material-symbols-rounded">apps</span></a>
     <div class="container">
         <div class="time-container" style="border-radius: 10px; background: white; opacity: 75%;">
@@ -28,6 +77,7 @@
             </div>
             <br>
             <button class="buttonStyle">Add Link</button>
+            <button id="removeAllButton">Remove All Links</button>
         </div>
 
         <div class="search-container">
@@ -43,12 +93,14 @@
             // Load quick links from localStorage on page load
             function loadQuickLinks() {
                 const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
+                quickLinksContainer.innerHTML = ''; // Clear current links before loading new ones
                 savedLinks.forEach(link => {
                     const linkElement = document.createElement('a');
                     linkElement.href = link.url;
                     linkElement.textContent = link.name;
                     linkElement.classList.add('quick-link');
                     quickLinksContainer.appendChild(linkElement);
+                    quickLinksContainer.appendChild(document.createElement('br')); // Add a line break after each link
                 });
             }
 
@@ -67,10 +119,9 @@
                     const linkElement = document.createElement('a');
                     linkElement.href = linkUrl;
                     linkElement.textContent = linkText;
-                    linkElement.classList.add('quick-link'); // Add styling class
+                    linkElement.classList.add('quick-link');
                     quickLinksContainer.appendChild(linkElement);
-                    quickLinksContainer.appendChild(document.createElement('br')); // To create a new line after each link
-
+                    quickLinksContainer.appendChild(document.createElement('br')); // Add a line break after the new link
                 }
             });
 
@@ -82,15 +133,28 @@
                 }
             });
 
+            // Remove all quick links
+            document.querySelector('#removeAllButton').addEventListener('click', function() {
+                if (confirm("Are you sure you want to remove all quick links?")) {
+                    localStorage.removeItem('quickLinks'); // Clear links from localStorage
+                    quickLinksContainer.innerHTML = ''; // Clear links from the page
+                }
+            });
+
             // Load the quick links when the page is loaded
             loadQuickLinks();
+        });
+
+        // Allow 'Enter' to trigger search
+        document.querySelector('#search').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                document.querySelector('#searchButton').click();
+            }
         });
     </script>
 
     <!-- Font Awesome (for the search icon) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- External script -->
     <script src="script.js"></script>
 </body>
 </html>
