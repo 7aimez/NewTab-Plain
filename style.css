@@ -190,14 +190,14 @@ input {
   border-radius: 2.5px;
   background-color: white;
   color: grey;
-  width: 50px;
+  width: 200px;
 }
 
 .quick-link:hover {
   background-color: light-grey;
   color: white;
   border-bottom: 1px solid green;
-  width: 70px;
+  width: 300px;
 }
 
 
