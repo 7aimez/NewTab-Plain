@@ -12,13 +12,12 @@
     <link rel="stylesheet" href="style.css">
     <script src="autofocus.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Barrio&family=Comfortaa:wght@300&family=Doto:wght@100..900&family=Kablammo&family=Poiret+One&family=Quicksand:wght@300&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-
         body {
             background-image: url('bgimage.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            font-family: 'Roboto Mono', monospace;
         }
 
         .quick-link {
@@ -26,7 +25,6 @@
             margin-bottom: 10px;
             text-decoration: none;
             color: #333;
-            font-family: 'Roboto Mono', monospace;
         }
 
         .quick-link:hover {
@@ -37,7 +35,7 @@
         .buttonStyle, #removeAllButton {
             width: 40px;
             height: 40px;
-            background-color: #d3d3d3; /* light-grey fixed */
+            background-color: #d3d3d3; 
             border: none;
             color: white;
             padding: 10px 20px;
@@ -47,16 +45,10 @@
             margin-top: 10px;
             font-family: 'Quicksand';
             border-radius: 5px;
-            transition: background-color 0.3s ease;
         }
 
         .buttonStyle:hover, #removeAllButton:hover {
             background-color: #0073e6;
-            color: white;
-        }
-
-        .buttonStyle:focus, #removeAllButton:focus {
-            outline: 2px solid #45a049;
         }
 
         .quickLinksContainer {
@@ -67,59 +59,20 @@
             text-align: center;
         }
 
-        .quickLinksContainer a {
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 500;
-            padding: 5px 10px;
-            background-color: #f0f0f0;
-            border-radius: 3px;
-            transition: background-color 0.3s ease;
-        }
-
-        .quickLinksContainer a:hover {
-            background-color: #d3d3d3;
-        }
-
         .search-container input[type="text"] {
-            width: 200px;
             padding: 10px;
             margin: 5px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            font-family: 'Roboto Mono', monospace;
         }
 
         .search-container button {
             padding: 10px 20px;
-            font-family: 'Quicksand', sans-serif;
-            border-radius: 5px;
             background-color: #0073e6;
             color: white;
             border: none;
             cursor: pointer;
-        }
-
-        .search-container button:hover {
-            background-color: #005bb5;
-        }
-
-        .search-container button:focus {
-            outline: 2px solid #45a049;
-        }
-
-        .remove-link-button {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            font-size: 12px;
-            padding: 5px;
             border-radius: 5px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-
-        .remove-link-button:hover {
-            background-color: #d32f2f;
         }
 
         .change-title-container {
@@ -131,7 +84,6 @@
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            font-family: 'Roboto Mono', monospace;
             margin-right: 10px;
         }
 
@@ -139,14 +91,9 @@
             padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
-            font-family: 'Quicksand', sans-serif;
-            border-radius: 5px;
             border: none;
             cursor: pointer;
-        }
-
-        .change-title-container button:hover {
-            background-color: #45a049;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -154,8 +101,8 @@
     <a id="moreButton" href="more.html"><span class="material-symbols-rounded">apps</span></a>
     <div class="container">
         <div class="time-container" style="border-radius: 10px; background: white; opacity: 75%;">
-            <h1 style="font-family: Roboto Mono; font-weight: 200;" id="time"></h1>
-            <h2 style="font-family: Roboto Mono; font-weight: 200;" id="date"></h2>
+            <h1 id="time"></h1>
+            <h2 id="date"></h2>
         </div><br><br>
 
         <div class="quickLinks">
