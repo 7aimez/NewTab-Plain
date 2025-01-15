@@ -124,8 +124,10 @@
                     linkElement.href = linkUrl;
                     linkElement.textContent = linkText;
                     linkElement.classList.add('quick-link');
+                    linkElement.addAttribute('align="center')
                     quickLinksContainer.appendChild(linkElement);
                     quickLinksContainer.appendChild(document.createElement('br')); // Add a line break after the new link
+                    
                 }
             });
 
