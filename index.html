@@ -26,7 +26,6 @@
             margin-bottom: 10px;
             text-decoration: none;
             color: #333;
-            text-align: center; /* Centering the text within each link */
         }
 
         .quick-link:hover {
@@ -70,39 +69,11 @@
         .quickLinksContainer {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Align links in the center */
+            align-items: center; /* Center links horizontally */
             justify-content: center;
             text-align: center;
         }
 
-        #searchButton {
-            background-color: #0073e6;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        #searchButton:hover {
-            background-color: #005bb5;
-        }
-
-        /* Style for the search input and button */
-        .search-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        #search {
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            margin-right: 10px;
-        }
     </style>
 </head>
 <body>
@@ -163,7 +134,6 @@
                     linkElement.href = linkUrl;
                     linkElement.textContent = linkText;
                     linkElement.classList.add('quick-link');
-                    linkElement.setAttribute('align', 'center'); // Fixed here
                     
                     quickLinksContainer.appendChild(linkElement);
                     quickLinksContainer.appendChild(document.createElement('br')); // Add a line break after the new link
