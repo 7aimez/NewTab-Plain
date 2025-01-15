@@ -36,7 +36,7 @@
         .buttonStyle {
             width: 40px;
             height: 40px;
-            background-color: light-grey;
+            background-color: #d3d3d3; /* Fixed color for light-grey */
             border: none;
             color: white;
             padding: 1px;
@@ -53,7 +53,7 @@
         #removeAllButton {
             width: 40px;
             height: 40px;
-            background-color: light-grey;
+            background-color: #d3d3d3; /* Fixed color for light-grey */
             border: none;
             color: white;
             padding: 10px 20px;
@@ -63,6 +63,19 @@
             margin-top: 10px;
             font-family: 'Quicksand';
             padding: 1px;
+        }
+
+        #searchButton {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #searchButton:hover {
+            background-color: #005bb5;
         }
     </style>
 </head>
@@ -103,7 +116,6 @@
                     linkElement.href = link.url;
                     linkElement.textContent = link.name;
                     linkElement.classList.add('quick-link');
-                    linkElement.addAttribute('align', 'center')
                     quickLinksContainer.appendChild(linkElement);
                     quickLinksContainer.appendChild(document.createElement('br')); // Add a line break after each link
                 });
@@ -125,10 +137,10 @@
                     linkElement.href = linkUrl;
                     linkElement.textContent = linkText;
                     linkElement.classList.add('quick-link');
-                    linkElement.addAttribute('align', 'center')
+                    linkElement.setAttribute('align', 'center'); // Fix here
+                    
                     quickLinksContainer.appendChild(linkElement);
                     quickLinksContainer.appendChild(document.createElement('br')); // Add a line break after the new link
-                    
                 }
             });
 
