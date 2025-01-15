@@ -12,7 +12,142 @@
     <link rel="stylesheet" href="style.css">
     <script src="autofocus.js"></script>
     <style>
-        /* Your existing styles here */
+        @import url('https://fonts.googleapis.com/css2?family=Barrio&family=Comfortaa:wght@300&family=Doto:wght@100..900&family=Kablammo&family=Poiret+One&family=Quicksand:wght@300&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+        body {
+            background-image: url('bgimage.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .quick-link {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #333;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .quick-link:hover {
+            color: #0073e6;
+            text-decoration: underline;
+        }
+
+        .buttonStyle, #removeAllButton {
+            width: 40px;
+            height: 40px;
+            background-color: #d3d3d3; /* light-grey fixed */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: 'Quicksand';
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .buttonStyle:hover, #removeAllButton:hover {
+            background-color: #0073e6;
+            color: white;
+        }
+
+        .buttonStyle:focus, #removeAllButton:focus {
+            outline: 2px solid #45a049;
+        }
+
+        .quickLinksContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .quickLinksContainer a {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 500;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+
+        .quickLinksContainer a:hover {
+            background-color: #d3d3d3;
+        }
+
+        .search-container input[type="text"] {
+            width: 200px;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .search-container button {
+            padding: 10px 20px;
+            font-family: 'Quicksand', sans-serif;
+            border-radius: 5px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background-color: #005bb5;
+        }
+
+        .search-container button:focus {
+            outline: 2px solid #45a049;
+        }
+
+        .remove-link-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            font-size: 12px;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .remove-link-button:hover {
+            background-color: #d32f2f;
+        }
+
+        .change-title-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .change-title-container input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-family: 'Roboto Mono', monospace;
+            margin-right: 10px;
+        }
+
+        .change-title-container button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .change-title-container button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -29,71 +164,73 @@
                 <!-- Quick links will be loaded here -->
             </div>
             <br>
-            <button class="buttonStyle" aria-label="Add a quick link"><span class="material-symbols-rounded">+</span></button>
-            <button id="removeAllButton" aria-label="Remove all quick links"><span class="material-symbols-rounded">␡</span></button>
+            <button class="buttonStyle"><span class="material-symbols-rounded">+</span></button>
+            <button id="removeAllButton"><span class="material-symbols-rounded">␡</span></button>
         </div>
 
         <div class="search-container">
             <input type="text" id="search" placeholder="Search...">
             <button id="searchButton"><i class="fa fa-search"></i> Search</button>
         </div>
+
+        <div class="change-title-container">
+            <input type="text" id="newTitle" placeholder="Enter new title">
+            <button id="changeTitleButton">Change Title</button>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const quickLinksContainer = document.querySelector('.quickLinksContainer');
+            const newTitleInput = document.querySelector('#newTitle');
+            const changeTitleButton = document.querySelector('#changeTitleButton');
 
             // Load quick links from localStorage on page load
             function loadQuickLinks() {
-                try {
-                    const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
-                    quickLinksContainer.innerHTML = ''; // Clear current links before loading new ones
-                    savedLinks.forEach(link => {
-                        // Make sure the link's URL is valid
-                        if (link.url.match(/^https?:\/\//)) {
-                            const linkElement = document.createElement('a');
-                            linkElement.href = link.url;
-                            linkElement.textContent = link.name;
-                            linkElement.classList.add('quick-link');
-                            quickLinksContainer.appendChild(linkElement);
-                            quickLinksContainer.appendChild(document.createElement('br')); // Add a line break after each link
-                        } else {
-                            console.error(`Invalid URL: ${link.url}`); // Log invalid URLs for debugging
-                        }
+                const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
+                quickLinksContainer.innerHTML = ''; // Clear current links before loading new ones
+                savedLinks.forEach((link, index) => {
+                    const linkElement = document.createElement('a');
+                    linkElement.href = link.url;
+                    linkElement.textContent = link.name;
+                    linkElement.classList.add('quick-link');
+
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Remove';
+                    removeButton.classList.add('remove-link-button');
+                    removeButton.addEventListener('click', function() {
+                        removeQuickLink(index);
                     });
-                } catch (e) {
-                    console.error('Error accessing localStorage', e);
-                }
+
+                    const linkWrapper = document.createElement('div');
+                    linkWrapper.appendChild(linkElement);
+                    linkWrapper.appendChild(removeButton);
+                    quickLinksContainer.appendChild(linkWrapper);
+                    quickLinksContainer.appendChild(document.createElement('br')); // Add a line break after each link
+                });
             }
 
             // Function to handle adding a new quick link
             document.querySelector('.buttonStyle').addEventListener('click', function() {
-                const linkUrl = prompt("Enter the URL for your quick link (without 'https://' if you want to skip it):");
+                const linkUrl = prompt("Enter the URL for your quick link:");
                 const linkText = prompt("Enter the name of your quick link:");
 
                 if (linkUrl && linkText) {
-                    // Check if the link includes 'http://' or 'https://', and if not, prepend 'https://'
-                    if (!linkUrl.match(/^https?:\/\//)) {
-                        linkUrl = 'https://' + linkUrl;
-                    }
-
+                    // Basic validation for a valid URL
                     try {
-                        // Save the new link to localStorage
-                        const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
-                        savedLinks.push({ url: linkUrl, name: linkText });
-                        localStorage.setItem('quickLinks', JSON.stringify(savedLinks));
-
-                        // Create a new anchor element for the quick link
-                        const linkElement = document.createElement('a');
-                        linkElement.href = linkUrl;
-                        linkElement.textContent = linkText;
-                        linkElement.classList.add('quick-link');
-                        
-                        quickLinksContainer.appendChild(linkElement);
-                        quickLinksContainer.appendChild(document.createElement('br')); // Add a line break after the new link
-                    } catch (e) {
-                        console.error('Error saving quick link', e);
+                        new URL(linkUrl); // Try to create a new URL object to check validity
+                    } catch (error) {
+                        alert("The URL entered is not valid.");
+                        return;
                     }
+
+                    // Save the new link to localStorage
+                    const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
+                    savedLinks.push({ url: linkUrl, name: linkText });
+                    localStorage.setItem('quickLinks', JSON.stringify(savedLinks));
+
+                    // Load the quick links again to reflect the new one
+                    loadQuickLinks();
                 }
             });
 
@@ -108,53 +245,33 @@
             // Remove all quick links
             document.querySelector('#removeAllButton').addEventListener('click', function() {
                 if (confirm("Are you sure you want to remove all quick links?")) {
-                    try {
-                        localStorage.removeItem('quickLinks'); // Clear links from localStorage
-                        quickLinksContainer.innerHTML = ''; // Clear links from the page
-                    } catch (e) {
-                        console.error('Error removing quick links', e);
-                    }
+                    localStorage.removeItem('quickLinks'); // Clear links from localStorage
+                    quickLinksContainer.innerHTML = ''; // Clear links from the page
                 }
             });
 
-            // Load the quick links when the page is loaded
+            // Remove a specific quick link
+            function removeQuickLink(index) {
+                const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
+                savedLinks.splice(index, 1); // Remove the specific link
+                localStorage.setItem('quickLinks', JSON.stringify(savedLinks));
+                loadQuickLinks();
+            }
+
+            // Change page title
+            changeTitleButton.addEventListener('click', function() {
+                const newTitle = newTitleInput.value.trim();
+                if (newTitle) {
+                    document.title = newTitle;
+                    alert("Page title changed to: " + newTitle);
+                } else {
+                    alert("Please enter a valid title.");
+                }
+            });
+
+            // Load quick links on page load
             loadQuickLinks();
-
-            // Update time every second
-            function updateTime() {
-                const timeElement = document.getElementById('time');
-                const dateElement = document.getElementById('date');
-                const now = new Date();
-
-                const hours = now.getHours().toString().padStart(2, '0');
-                const minutes = now.getMinutes().toString().padStart(2, '0');
-                const seconds = now.getSeconds().toString().padStart(2, '0');
-                const timeString = `${hours}:${minutes}:${seconds}`;
-
-                const dateString = now.toLocaleDateString('en-US', {
-                    weekday: 'long',
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric'
-                });
-
-                timeElement.textContent = timeString;
-                dateElement.textContent = dateString;
-            }
-
-            setInterval(updateTime, 1000);
-            updateTime(); // Initial call
-        });
-
-        // Allow 'Enter' to trigger search
-        document.querySelector('#search').addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                document.querySelector('#searchButton').click();
-            }
         });
     </script>
-
-    <!-- Font Awesome (for the search icon) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </body>
 </html>
