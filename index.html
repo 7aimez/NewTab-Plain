@@ -12,12 +12,13 @@
     <link rel="stylesheet" href="style.css">
     <script src="autofocus.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barrio&family=Comfortaa:wght@300&family=Doto:wght@100..900&family=Kablammo&family=Poiret+One&family=Quicksand:wght@300&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
         body {
             background-image: url('bgimage.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            font-family: 'Roboto Mono', monospace;
         }
 
         .quick-link {
@@ -32,10 +33,27 @@
             text-decoration: underline;
         }
 
-        .buttonStyle, #removeAllButton {
+        .buttonStyle {
             width: 40px;
             height: 40px;
-            background-color: #d3d3d3; 
+            background-color: #d3d3d3; /* light-grey fixed */
+            border: none;
+            color: white;
+            padding: 1px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .buttonStyle:hover {
+            background-color: #45a049;
+        }
+
+        #removeAllButton {
+            width: 40px;
+            height: 40px;
+            background-color: #d3d3d3; /* light-grey fixed */
             border: none;
             color: white;
             padding: 10px 20px;
@@ -44,20 +62,26 @@
             cursor: pointer;
             margin-top: 10px;
             font-family: 'Quicksand';
-            border-radius: 5px;
+            padding: 1px;
         }
 
-        .buttonStyle:hover, #removeAllButton:hover {
-            background-color: #0073e6;
+        /* Centering the quick links container */
+        .quickLinksContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center links horizontally */
+            justify-content: center;
+            text-align: center;
         }
+
     </style>
 </head>
 <body>
     <a id="moreButton" href="more.html"><span class="material-symbols-rounded">apps</span></a>
     <div class="container">
         <div class="time-container" style="border-radius: 10px; background: white; opacity: 75%;">
-            <h1 id="time"></h1>
-            <h2 id="date"></h2>
+            <h1 style="font-family: Roboto Mono; font-weight: 200;" id="time"></h1>
+            <h2 style="font-family: Roboto Mono; font-weight: 200;" id="date"></h2>
         </div><br><br>
 
         <div class="quickLinks">
@@ -74,40 +98,22 @@
             <input type="text" id="search" placeholder="Search...">
             <button id="searchButton"><i class="fa fa-search"></i> Search</button>
         </div>
-
-        <div class="change-title-container">
-            <input type="text" id="newTitle" placeholder="Enter new title">
-            <button id="changeTitleButton">Change Title</button>
-        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const quickLinksContainer = document.querySelector('.quickLinksContainer');
-            const newTitleInput = document.querySelector('#newTitle');
-            const changeTitleButton = document.querySelector('#changeTitleButton');
 
             // Load quick links from localStorage on page load
             function loadQuickLinks() {
                 const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
                 quickLinksContainer.innerHTML = ''; // Clear current links before loading new ones
-                savedLinks.forEach((link, index) => {
+                savedLinks.forEach(link => {
                     const linkElement = document.createElement('a');
                     linkElement.href = link.url;
                     linkElement.textContent = link.name;
                     linkElement.classList.add('quick-link');
-
-                    const removeButton = document.createElement('button');
-                    removeButton.textContent = 'Remove';
-                    removeButton.classList.add('remove-link-button');
-                    removeButton.addEventListener('click', function() {
-                        removeQuickLink(index);
-                    });
-
-                    const linkWrapper = document.createElement('div');
-                    linkWrapper.appendChild(linkElement);
-                    linkWrapper.appendChild(removeButton);
-                    quickLinksContainer.appendChild(linkWrapper);
+                    quickLinksContainer.appendChild(linkElement);
                     quickLinksContainer.appendChild(document.createElement('br')); // Add a line break after each link
                 });
             }
@@ -118,21 +124,19 @@
                 const linkText = prompt("Enter the name of your quick link:");
 
                 if (linkUrl && linkText) {
-                    // Basic validation for a valid URL
-                    try {
-                        new URL(linkUrl); // Try to create a new URL object to check validity
-                    } catch (error) {
-                        alert("The URL entered is not valid.");
-                        return;
-                    }
-
                     // Save the new link to localStorage
                     const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
                     savedLinks.push({ url: linkUrl, name: linkText });
                     localStorage.setItem('quickLinks', JSON.stringify(savedLinks));
 
-                    // Load the quick links again to reflect the new one
-                    loadQuickLinks();
+                    // Create a new anchor element for the quick link
+                    const linkElement = document.createElement('a');
+                    linkElement.href = linkUrl;
+                    linkElement.textContent = linkText;
+                    linkElement.classList.add('quick-link');
+                    
+                    quickLinksContainer.appendChild(linkElement);
+                    quickLinksContainer.appendChild(document.createElement('br')); // Add a line break after the new link
                 }
             });
 
@@ -140,7 +144,7 @@
             document.querySelector('#searchButton').addEventListener('click', function() {
                 const query = document.querySelector('#search').value;
                 if (query) {
-                    window.location.href = `https://www.google.com/search?q=${query}`;
+                    window.location.href = https://www.google.com/search?q=${query};
                 }
             });
 
@@ -152,28 +156,20 @@
                 }
             });
 
-            // Remove a specific quick link
-            function removeQuickLink(index) {
-                const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
-                savedLinks.splice(index, 1); // Remove the specific link
-                localStorage.setItem('quickLinks', JSON.stringify(savedLinks));
-                loadQuickLinks();
-            }
-
-            // Change page title
-            changeTitleButton.addEventListener('click', function() {
-                const newTitle = newTitleInput.value.trim();
-                if (newTitle) {
-                    document.title = newTitle;
-                    alert("Page title changed to: " + newTitle);
-                } else {
-                    alert("Please enter a valid title.");
-                }
-            });
-
-            // Load quick links on page load
+            // Load the quick links when the page is loaded
             loadQuickLinks();
         });
+
+        // Allow 'Enter' to trigger search
+        document.querySelector('#search').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                document.querySelector('#searchButton').click();
+            }
+        });
     </script>
+
+    <!-- Font Awesome (for the search icon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="script.js"></script>
 </body>
 </html>
