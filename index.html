@@ -10,6 +10,69 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>New Tab</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barrio&family=Comfortaa:wght@300&family=Doto:wght@100..900&family=Kablammo&family=Poiret+One&family=Quicksand:wght@300&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+        body {
+            background-image: url('bgimage.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .quick-link {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .quick-link:hover {
+            color: #0073e6;
+            text-decoration: underline;
+        }
+
+        .buttonStyle {
+            width: 40px;
+            height: 40px;
+            background-color: #d3d3d3; /* light-grey fixed */
+            border: none;
+            color: white;
+            padding: 1px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .buttonStyle:hover {
+            background-color: #45a049;
+        }
+
+        #removeAllButton {
+            width: 40px;
+            height: 40px;
+            background-color: #d3d3d3; /* light-grey fixed */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: 'Quicksand';
+            padding: 1px;
+        }
+
+        /* Centering the quick links container */
+        .quickLinksContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center links horizontally */
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <a id="moreButton" href="more.html"><span class="material-symbols-rounded">apps</span></a>
