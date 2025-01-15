@@ -191,6 +191,7 @@ input {
   background-color: white;
   color: grey;
   width: 200px;
+  align: center;
 }
 
 .quick-link:hover {
