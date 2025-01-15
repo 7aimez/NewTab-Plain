@@ -21,17 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to handle adding a new quick link
     document.querySelector('.buttonStyle').addEventListener('click', function() {
-        const linkUrl = prompt("Enter the URL for your quick link (without 'https://' if you want to skip it):");
+        const linkUrl = prompt("Enter the URL for your quick link:");
         const linkText = prompt("Enter the name of your quick link:");
 
         if (linkUrl && linkText) {
-            // Check if the link includes 'http://' or 'https://', and if not, prepend 'https://'
-            if (!linkUrl.match(/^https?:\/\//)) {
-                linkUrl = 'https://' + linkUrl;
-            }
-
             try {
-                // Save the new link to localStorage
                 const savedLinks = JSON.parse(localStorage.getItem('quickLinks')) || [];
                 savedLinks.push({ url: linkUrl, name: linkText });
                 localStorage.setItem('quickLinks', JSON.stringify(savedLinks));
